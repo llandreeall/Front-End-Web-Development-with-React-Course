@@ -1,14 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap';
 import moment from 'moment';
 
-
-class Dishdetail extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    renderDish(dish) {
+    function RenderDish({dish}) {
         if (dish != null) {
             return(
                 <Card>
@@ -26,7 +20,7 @@ class Dishdetail extends Component {
         }
     }
 
-    renderComments(comments) {
+    function RenderComments({comments}) {
         if (comments!= null) {
             const comm = comments.map((comments)=>{
                 const date = moment(comments.date).format('LL');
@@ -46,36 +40,34 @@ class Dishdetail extends Component {
         }
     }
 
-    render() {
+    const Dishdetail = (props) => {
          
-            const dish = this.props.dish;
-            var comments;
+            const dish = props.dish;
+            
             if (dish != null) {
-                comments = dish.comments;
+                return(
+                    <div class = "container">
+                        <div className="row">
+                            <div className="col-12 col-md-5 m-1">
+                                <RenderDish dish = {props.dish} />
+                            </div>
+                            <div className="col-12 col-md-5 m-1">
+                                <div className="header">
+                                    <h4>Comments</h4>
+                                </div>
+                                <RenderComments comments = {props.dish.comments} />
+                            </div>
+                        </div>
+                    </div>
+                    
+                );
             } else {
                 return(
                     <div></div>
                 );
-            }
-            return(
-                
-                <div className="row">
-                    <div className="col-12 col-md-5 m-1">
-                        {this.renderDish(dish)}
-                    </div>
-                    <div className="col-12 col-md-5 m-1">
-                        <div className="header">
-                            <h4>Comments</h4>
-                        </div>
-                        {this.renderComments(comments)}
-                    </div>
-                </div>
-                
-            );
-               
+            }  
             
-        
     }
-}
+
 
 export default Dishdetail;
