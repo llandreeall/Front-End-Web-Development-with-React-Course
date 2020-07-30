@@ -1,17 +1,19 @@
 import React from 'react';
-import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap';
-import moment from 'moment';
+import { Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
     function RenderDish({dish}) {
         if (dish != null) {
             return(
-                <Card>
-                    <CardImg top src={dish.image} alt={dish.name} /> 
-                    <CardBody>
-                        <CardTitle>{dish.name}</CardTitle>
-                        <CardText>{dish.description}</CardText>
-                    </CardBody>
-                </Card>
+                <div className="col-12 col-md-5 m-1">
+                    <Card>
+                        <CardImg top src={dish.image} alt={dish.name} /> 
+                        <CardBody>
+                            <CardTitle>{dish.name}</CardTitle>
+                            <CardText>{dish.description}</CardText>
+                        </CardBody>
+                    </Card>
+                </div>
             );
         } else {
             return(
@@ -22,16 +24,23 @@ import moment from 'moment';
 
     function RenderComments({comments}) {
         if (comments!= null) {
-            const comm = comments.map((comments)=>{
-                const date = moment(comments.date).format('LL');
-                    return(
+            
+                return(
+                    <div className="col-12 col-md-5 m-1">
+                        <h4>Comments</h4>
                         <ul class="list-unstyled">
-                            <li>{comments.comment}</li>
-                            <li>-- {comments.author}, {date}</li>
+                            {comments.map((comment) => {
+                                return (
+                                    <li key={comment.id}>
+                                    <p>{comment.comment}</p>
+                                    <p>-- {comment.author} , 
+                                    {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</p>
+                                    </li>
+                                );
+                            })}
                         </ul>
-                    );
-                });
-            return comm;
+                    </div>
+                );
             
         } else {
             return(
@@ -48,16 +57,21 @@ import moment from 'moment';
                 return(
                     <div class = "container">
                         <div className="row">
-                            <div className="col-12 col-md-5 m-1">
-                                <RenderDish dish = {props.dish} />
-                            </div>
-                            <div className="col-12 col-md-5 m-1">
-                                <div className="header">
-                                    <h4>Comments</h4>
-                                </div>
-                                <RenderComments comments = {props.dish.comments} />
+                            <Breadcrumb>
+                                <BreadcrumbItem><Link to='/menu'>Menu</Link></BreadcrumbItem>
+                                <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+                            </Breadcrumb>
+                            <div className="col-12">
+                                <h3>{props.dish.name}</h3>
+                                <hr />
                             </div>
                         </div>
+                            <div className="row">
+                                
+                                <RenderDish dish = {props.dish} />
+                                <RenderComments comments = {props.comments} />
+                                
+                            </div>
                     </div>
                     
                 );
