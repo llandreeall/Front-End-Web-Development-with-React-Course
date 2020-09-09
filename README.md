@@ -19,8 +19,8 @@ Week 2: React Router and Single Page Applications<br>
 In this week, I learned about various component types. I learned about React router and its use in designing single page applications. I also learned about single page applications and use React Router to design single page applications.<br>
 Assignment 2: At the end of this assignment, I have completed the following tasks:<br>
 -Integrated the AboutComponent given above into the single page application.<br>
--Added a new functional component named <RenderLeader> through the RenderLeader() function to AboutComponent.js that renders the details of a given leader using the reactstrap <Media> component.<br>
--Construct and render the list of leaders in the About Us page using the <RenderLeader> component implemented above.<br>
+-Added a new functional component named "RenderLeader" through the RenderLeader() function to AboutComponent.js that renders the details of a given leader using the reactstrap "Media" component.<br>
+-Construct and render the list of leaders in the About Us page using the "RenderLeader" component implemented above.<br>
  <br>
 Week 3: React Forms, Flow Architecture and Introduction to Redux<br>
 In this module you was introduced to uncontrolled and controlled forms and briefly examine form validation in React applications. I got an overview of the Flux architecture and introduced to Redux as a way of realizing the flux architecture.<br>
